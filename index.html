@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5" />
+    <title>Shree Balaji Electronics | Hardware, PVC Pipes & Electronics</title>
+    <!-- Tailwind + Font Awesome -->
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .shadow-premium {
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08), 0 8px 24px -6px rgba(0, 0, 0, 0.02);
+        }
+        .hover-scale {
+            transition: transform 0.25s ease, box-shadow 0.3s;
+        }
+        .hover-scale:hover {
+            transform: scale(1.02);
+            box-shadow: 0 30px 45px -15px rgba(0, 0, 0, 0.15);
+        }
+        .product-card {
+            transition: all 0.25s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.15);
+        }
+        .product-card img {
+            transition: transform 0.4s ease;
+        }
+        .product-card:hover img {
+            transform: scale(1.06);
+        }
+        .stat-number {
+            font-size: 2.4rem;
+            font-weight: 700;
+        }
+        .btn-whatsapp {
+            background: #25D366;
+        }
+        .btn-whatsapp:hover {
+            background: #1da851;
+        }
+        .btn-call {
+            background: #1e3a8a;
+        }
+        .btn-call:hover {
+            background: #1e3a8a;
+            opacity: 0.9;
+        }
+        .floating-btn {
+            position: fixed;
+            bottom: 28px;
+            z-index: 50;
+            width: 58px;
+            height: 58px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.25);
+            transition: 0.2s;
+        }
+        .floating-btn:hover {
+            transform: scale(1.08);
+        }
+        .floating-wa {
+            right: 28px;
+            background: #25D366;
+            color: white;
+        }
+        .floating-call {
+            left: 28px;
+            background: #1e3a8a;
+            color: white;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 28px;
+            z-index: 50;
+            background: #f97316;
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px -6px rgba(234, 88, 12, 0.4);
+            transition: 0.2s;
+        }
+        .back-to-top:hover {
+            background: #ea580c;
+            transform: translateY(-4px);
+        }
+        .hero-image-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .hero-image-grid img {
+            width: 100%;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 8px 18px -6px rgba(0, 0, 0, 0.08);
+            transition: 0.2s;
+        }
+        .hero-image-grid img:hover {
+            transform: scale(1.03);
+        }
+        @media (max-width: 640px) {
+            .hero-image-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .rating-star {
+            color: #f59e0b;
+        }
+        .border-soft {
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+        .map-container {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.08);
+        }
+        footer a {
+            transition: color 0.15s;
+        }
+        footer a:hover {
+            color: #f97316;
+        }
+
+        /* Hamburger animation */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .hamburger span {
+            display: block;
+            height: 3px;
+            background: #1e3a8a;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+
+        /* mobile nav slide */
+        .mobile-nav {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+        .mobile-nav.open {
+            max-height: 400px;
+            opacity: 1;
+        }
+
+        /* splash image styling */
+        .splash-img {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 16px;
+        }
+
+        /* product card image fallback gradient */
+        .card-img-placeholder {
+            background: linear-gradient(145deg, #eef2f6, #d9e0e8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e3a8a;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 antialiased">
+
+    <!-- Sticky Navbar -->
+    <nav class="sticky top-0 z-40 glass shadow-premium border-b border-white/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl font-bold text-blue-800"><img src="favicon.png" class="w-8 h-8 mr-1 inline" alt="Logo">SHREE BALAJI </span>
+                <span class=" sm:inline text-sm font-medium text-gray-600 ml-1">Electronics</span>
+            </div>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#home" class="hover:text-orange-500 transition">Home</a>
+                <a href="#about" class="hover:text-orange-500 transition">About</a>
+                <a href="#categories" class="hover:text-orange-500 transition">Products</a>
+                <a href="#gallery" class="hover:text-orange-500 transition">Gallery</a>
+                <a href="#reviews" class="hover:text-orange-500 transition">Reviews</a>
+                <a href="#contact" class="hover:text-orange-500 transition">Contact</a>
+            </div>
+
+            <!-- Right: Call + Hamburger -->
+            <div class="flex items-center gap-3">
+                <a href="tel:+919931744102" class="hidden sm:inline-flex bg-blue-800 hover:bg-blue-900 text-white px-4 py-1.5 rounded-full text-sm font-medium shadow-md transition"><i class="fas fa-phone-alt mr-1"></i> Call</a>
+
+                <!-- Hamburger with animation -->
+                <div class="md:hidden hamburger" id="hamburger" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Items (slide down) -->
+        <div class="md:hidden mobile-nav" id="mobileNav">
+            <div class="flex flex-col items-start px-6 pb-5 pt-2 space-y-3 text-sm font-medium bg-white/80 backdrop-blur-sm border-t border-white/20">
+                <a href="#home" class="hover:text-orange-500 transition w-full border-b border-gray-100/50 pb-2">Home</a>
+                <a href="#about" class="hover:text-orange-500 transition w-full border-b border-gray-100/50 pb-2">About</a>
+                <a href="#categories" class="hover:text-orange-500 transition w-full border-b border-gray-100/50 pb-2">Products</a>
+                <a href="#gallery" class="hover:text-orange-500 transition w-full border-b border-gray-100/50 pb-2">Gallery</a>
+                <a href="#reviews" class="hover:text-orange-500 transition w-full border-b border-gray-100/50 pb-2">Reviews</a>
+                <a href="#contact" class="hover:text-orange-500 transition w-full">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-8 pb-12 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div>
+                <span class="inline-block bg-orange-100 text-orange-700 text-xs font-semibold px-4 py-1 rounded-full uppercase tracking-wide">Trusted since 2015</span>
+                <h1 class="text-4xl sm:text-5xl font-bold leading-tight mt-3 text-blue-900">Shree Balaji <span class="text-orange-500">Electronics</span></h1>
+                <p class="text-lg text-gray-600 mt-4 max-w-lg">Your One-Stop Destination for Hardware, PVC Pipes & Electronics</p>
+                <div class="flex flex-wrap gap-3 mt-6">
+                    <a href="tel:+919931744102" class="bg-blue-800 hover:bg-blue-900 text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2 transition"><i class="fas fa-phone-alt"></i> Call Now</a>
+                    <a href="https://www.google.com/maps?q=26.077643,84.733582" target="_blank" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2 transition"><i class="fas fa-map-pin"></i> Get Directions</a>
+                    <a href="https://wa.me/919931744102" target="_blank" class="btn-whatsapp text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2 transition"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+                <!-- Splash images grid -->
+                
+            </div>
+            <div class="relative">
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="splash-img rounded-2xl shadow-premium h-48 w-full" style="background-image: url('/img/2.jpg');"></div>
+                    <div class="splash-img rounded-2xl shadow-premium h-48 w-full" style="background-image: url('/img/1.jpg');"></div>
+                    <div class="splash-img rounded-2xl shadow-premium h-48 w-full col-span-2" style="background-image: url('/img/hero1.jpg');"></div>
+                </div>
+                <div class="absolute -bottom-4 -right-4 bg-white/70 backdrop-blur p-3 rounded-2xl shadow-md border border-white/50">
+                    <i class="fas fa-check-circle text-orange-500 text-2xl"></i>
+                    <span class="ml-2 font-semibold">100% Genuine</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about" class="py-16 px-4 sm:px-6 bg-gray-50/60">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            <div>
+                <span class="text-orange-500 font-semibold text-sm tracking-wider">ABOUT US</span>
+                <h2 class="text-3xl font-bold mt-2 text-blue-900">Quality Products, Affordable Pricing</h2>
+                <p class="text-gray-600 mt-4 leading-relaxed">Shree Balaji Electronics is a trusted local store offering a wide range of PVC pipes, hardware, electrical supplies, electronics, and construction materials. We believe in customer satisfaction with genuine brands and fast service.</p>
+                <div class="grid grid-cols-2 gap-4 mt-6">
+                    <div><i class="fas fa-check-circle text-orange-500 mr-2"></i> Trusted Service</div>
+                    <div><i class="fas fa-check-circle text-orange-500 mr-2"></i> Best Prices</div>
+                    <div><i class="fas fa-check-circle text-orange-500 mr-2"></i> Genuine Brands</div>
+                    <div><i class="fas fa-check-circle text-orange-500 mr-2"></i> 10+ Years</div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="splash-img rounded-2xl shadow-premium h-48 w-full" style="background-image: url('/img/3.jpg');"></div>
+                <div class="splash-img rounded-2xl shadow-premium h-48 w-full" style="background-image: url('/img/4.jpg');"></div>
+                <div class="splash-img rounded-2xl shadow-premium h-48 w-full col-span-2" style="background-image: url('/img/5.jpg');"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Categories with splash images -->
+    <section id="categories" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-orange-500 font-semibold text-sm tracking-wider">CATEGORIES</span>
+            <h2 class="text-3xl font-bold text-blue-900">Our Product Range</h2>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
+            <div class="product-card bg-white rounded-2xl shadow-premium border border-gray-50 p-4 text-center">
+                <div class="splash-img rounded-xl w-full h-32" style="background-image: url('/img/9.jpg');"></div>
+                <h4 class="font-semibold mt-3">PVC Pipes & Fittings</h4>
+            </div>
+            <div class="product-card bg-white rounded-2xl shadow-premium border border-gray-50 p-4 text-center">
+                <div class="splash-img rounded-xl w-full h-32" style="background-image: url('/img/4.jpg');"></div>
+                <h4 class="font-semibold mt-3">Electrical Wires</h4>
+            </div>
+            <div class="product-card bg-white rounded-2xl shadow-premium border border-gray-50 p-4 text-center">
+                <div class="splash-img rounded-xl w-full h-32" style="background-image: url('/img/12.jpg');"></div>
+                <h4 class="font-semibold mt-3">Switches & Sockets</h4>
+            </div>
+            <div class="product-card bg-white rounded-2xl shadow-premium border border-gray-50 p-4 text-center">
+                <div class="splash-img rounded-xl w-full h-32" style="background-image: url('/img/5.jpg');"></div>
+                <h4 class="font-semibold mt-3">LED Lights & Bulbs</h4>
+            </div>
+            <div class="product-card bg-white rounded-2xl shadow-premium border border-gray-50 p-4 text-center">
+                <div class="splash-img rounded-xl w-full h-32" style="background-image: url('/img/7.jpg');"></div>
+                <h4 class="font-semibold mt-3">Hardware Tools</h4>
+            </div>
+          
+            <div class="product-card bg-white rounded-2xl shadow-premium border border-gray-50 p-4 text-center">
+                <div class="splash-img rounded-xl w-full h-32" style="background-image: url('/img/10.jpg');"></div>
+                <h4 class="font-semibold mt-3">Electronic Accessories</h4>
+            </div>
+            <div class="product-card bg-white rounded-2xl shadow-premium border border-gray-50 p-4 text-center">
+                <div class="splash-img rounded-xl w-full h-32" style="background-image: url('/img/8.jpg');"></div>
+                <h4 class="font-semibold mt-3">Paints </h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Gallery with splash -->
+    <section id="gallery" class="py-16 px-4 sm:px-6 bg-gray-50/60">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-10"><span class="text-orange-500 font-semibold text-sm tracking-wider">GALLERY</span><h2 class="text-3xl font-bold text-blue-900">Featured Products</h2></div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="overflow-hidden rounded-2xl shadow-premium splash-img h-48" style="background-image: url('/img/11.jpg');"></div>
+                <div class="overflow-hidden rounded-2xl shadow-premium splash-img h-48" style="background-image: url('/img/1.jpg');"></div>
+                <div class="overflow-hidden rounded-2xl shadow-premium splash-img h-48" style="background-image: url('/img/2.jpg');"></div>
+                <div class="overflow-hidden rounded-2xl shadow-premium splash-img h-48" style="background-image: url('/img/3.jpg');"></div>
+                <div class="overflow-hidden rounded-2xl shadow-premium splash-img h-48" style="background-image: url('/img/4.jpg');"></div>
+                <div class="overflow-hidden rounded-2xl shadow-premium splash-img h-48" style="background-image: url('/img/5.jpg');"></div>
+                <div class="overflow-hidden rounded-2xl shadow-premium splash-img h-48" style="background-image: url('/img/6.jpg');"></div>
+                <div class="overflow-hidden rounded-2xl shadow-premium splash-img h-48" style="background-image: url('/img/7.jpg');"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us + Stats -->
+    <section class="py-16 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-10"><span class="text-orange-500 font-semibold text-sm tracking-wider">WHY US</span><h2 class="text-3xl font-bold text-blue-900">Why Choose Shree Balaji</h2></div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-5">
+            <div class="bg-white p-5 rounded-2xl shadow-premium text-center"><i class="fas fa-medal text-orange-500 text-3xl mb-2"></i><h4 class="font-bold">Quality Products</h4></div>
+            <div class="bg-white p-5 rounded-2xl shadow-premium text-center"><i class="fas fa-tags text-orange-500 text-3xl mb-2"></i><h4 class="font-bold">Best Prices</h4></div>
+            <div class="bg-white p-5 rounded-2xl shadow-premium text-center"><i class="fas fa-shield-alt text-orange-500 text-3xl mb-2"></i><h4 class="font-bold">Genuine Brands</h4></div>
+            <div class="bg-white p-5 rounded-2xl shadow-premium text-center"><i class="fas fa-truck text-orange-500 text-3xl mb-2"></i><h4 class="font-bold">Fast Service</h4></div>
+            <div class="bg-white p-5 rounded-2xl shadow-premium text-center"><i class="fas fa-th-large text-orange-500 text-3xl mb-2"></i><h4 class="font-bold">Wide Range</h4></div>
+            <div class="bg-white p-5 rounded-2xl shadow-premium text-center"><i class="fas fa-smile text-orange-500 text-3xl mb-2"></i><h4 class="font-bold">Satisfaction</h4></div>
+        </div>
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-14 bg-blue-900/5 p-8 rounded-3xl">
+            <div class="text-center"><div class="stat-number text-blue-900">1000+</div><div class="text-gray-600">Happy Customers</div></div>
+            <div class="text-center"><div class="stat-number text-blue-900">500+</div><div class="text-gray-600">Products</div></div>
+            <div class="text-center"><div class="stat-number text-blue-900">10+</div><div class="text-gray-600">Years Experience</div></div>
+            <div class="text-center"><div class="stat-number text-blue-900">100%</div><div class="text-gray-600">Customer Support</div></div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews -->
+    <section id="reviews" class="py-16 px-4 sm:px-6 bg-gray-50/60">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-10"><span class="text-orange-500 font-semibold text-sm tracking-wider">TESTIMONIALS</span><h2 class="text-3xl font-bold text-blue-900">What Our Customers Say</h2></div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-premium"><div class="flex text-orange-400 text-lg"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="mt-3 text-gray-600">"Best place for PVC pipes and switches. Genuine brands and very reasonable prices."</p><h4 class="font-semibold mt-4">— Rajesh Kumar</h4></div>
+                <div class="bg-white p-6 rounded-2xl shadow-premium"><div class="flex text-orange-400 text-lg"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="mt-3 text-gray-600">"Amazing service! They helped me with all construction materials. Highly recommended."</p><h4 class="font-semibold mt-4">— Priya Singh</h4></div>
+                <div class="bg-white p-6 rounded-2xl shadow-premium"><div class="flex text-orange-400 text-lg"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="mt-3 text-gray-600">"I always buy electrical wires and LEDs from Shree Balaji. Trusted and quality products."</p><h4 class="font-semibold mt-4">— Amit Sharma</h4></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-10"><span class="text-orange-500 font-semibold text-sm tracking-wider">CONTACT</span><h2 class="text-3xl font-bold text-blue-900">Get in Touch</h2></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div>
+                <div class="space-y-4">
+                    <div><i class="fas fa-phone-alt text-orange-500 w-8"></i> +91 99317 44102</div>
+                    <div><i class="fab fa-whatsapp text-green-500 w-8"></i> +91 99317 44102</div>
+                    <div><i class="fas fa-envelope text-orange-500 w-8"></i> info@shreebalaji.com</div>
+                    <div><i class="fas fa-map-pin text-orange-500 w-8"></i> Madarpur Bazaar, Bihar 841422</div>
+                </div>
+                <div class="map-container mt-6">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14396.456789012345!2d84.733582!3d26.077643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1647845678901" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-premium">
+                <form>
+                    <div class="mb-4"><input type="text" placeholder="Your Name" class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-orange-300 outline-none"></div>
+                    <div class="mb-4"><input type="email" placeholder="Email" class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-orange-300 outline-none"></div>
+                    <div class="mb-4"><textarea rows="3" placeholder="Message" class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-orange-300 outline-none"></textarea></div>
+                    <button class="bg-blue-800 hover:bg-blue-900 text-white px-6 py-3 rounded-full w-full font-medium transition shadow-md"><i class="fas fa-paper-plane mr-2"></i> Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white/90 pt-12 pb-6 px-4 sm:px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div><h4 class="text-xl font-bold">Shree Balaji Electronics</h4><p class="text-sm mt-2 opacity-80">Your one-stop destination for hardware, PVC pipes & electronics.</p><div class="flex gap-3 mt-4 text-xl"><a href="#"><i class="fab fa-facebook"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div></div>
+            <div><h5 class="font-semibold">Quick Links</h5><ul class="mt-2 space-y-1 text-sm opacity-80"><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#categories">Products</a></li><li><a href="#contact">Contact</a></li></ul></div>
+            <div><h5 class="font-semibold">Contact</h5><ul class="mt-2 space-y-1 text-sm opacity-80"><li><i class="fas fa-phone mr-2"></i> +91 99317 44102</li><li><i class="fab fa-whatsapp mr-2"></i> WhatsApp</li><li><i class="fas fa-envelope mr-2"></i> info@shreebalaji.com</li></ul></div>
+            <div><h5 class="font-semibold">Visit Us</h5><p class="text-sm mt-2 opacity-80">Madarpur Bazaar, Bihar 841422</p><p class="text-sm opacity-80 mt-1">Mon-Sat: 9AM - 8PM</p></div>
+        </div>
+        <div class="border-t border-white/20 mt-8 pt-6 text-center text-sm opacity-70">© 2026 Shree Balaji Electronics. All rights reserved.</div>
+    </footer>
+
+    <!-- Floating Buttons -->
+    <a href="tel:+919931744102" class="floating-btn floating-call"><i class="fas fa-phone-alt text-2xl"></i></a>
+    <a href="https://wa.me/919931744102" target="_blank" class="floating-btn floating-wa"><i class="fab fa-whatsapp text-3xl"></i></a>
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <!-- JavaScript for Hamburger & Back-to-Top -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hamburger toggle
+            const hamburger = document.getElementById('hamburger');
+            const mobileNav = document.getElementById('mobileNav');
+
+            hamburger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('active');
+                mobileNav.classList.toggle('open');
+            });
+
+            // Close mobile nav on link click
+            document.querySelectorAll('#mobileNav a').forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    mobileNav.classList.remove('open');
+                });
+            });
+
+            // Back to top
+            document.querySelector('.back-to-top').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
